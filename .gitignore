@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+venv/
+.venv/
+
+# Generated outputs (regenerate with examples/ and evaluation/ scripts)
+examples/output/
+evaluation/output/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Original full-resolution logo (compressed copy lives in assets/)
+Univeral_Render.png

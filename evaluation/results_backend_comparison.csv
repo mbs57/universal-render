@@ -1,0 +1,25 @@
+script,backend,font,glyph_warnings,ssim_vs_ref,ink_iou_vs_ref,latency_ms
+Bengali,universal_render,Nirmala UI,0,1.0,1.0,4.13
+Bengali,mpl_default,Nirmala UI,104,0.088,0.176,12.31
+Bengali,mpl_correct_font,Nirmala UI,0,0.179,0.283,9.62
+Bengali,mplcairo,Nirmala UI,0,0.211,0.311,17.53
+Devanagari,universal_render,Nirmala UI,0,1.0,1.0,2.02
+Devanagari,mpl_default,Nirmala UI,80,0.075,0.159,8.24
+Devanagari,mpl_correct_font,Nirmala UI,0,0.234,0.284,8.98
+Devanagari,mplcairo,Nirmala UI,0,0.232,0.289,8.2
+Tamil,universal_render,Nirmala UI,0,1.0,1.0,2.22
+Tamil,mpl_default,Nirmala UI,52,0.115,0.176,6.84
+Tamil,mpl_correct_font,Nirmala UI,0,0.558,0.582,11.15
+Tamil,mplcairo,Nirmala UI,0,0.604,0.61,7.95
+Arabic,universal_render,Segoe UI,0,1.0,1.0,1.72
+Arabic,mpl_default,Segoe UI,0,0.376,0.264,7.12
+Arabic,mpl_correct_font,Segoe UI,0,0.329,0.228,7.73
+Arabic,mplcairo,Segoe UI,0,0.325,0.23,7.84
+Thai,universal_render,Leelawadee UI,0,1.0,1.0,1.38
+Thai,mpl_default,Leelawadee UI,22,0.114,0.217,6.25
+Thai,mpl_correct_font,Leelawadee UI,0,0.777,0.823,7.09
+Thai,mplcairo,Leelawadee UI,0,0.807,0.85,8.66
+Latin,universal_render,Segoe UI,0,1.0,1.0,1.46
+Latin,mpl_default,Segoe UI,0,0.523,0.514,8.27
+Latin,mpl_correct_font,Segoe UI,0,0.825,0.823,7.87
+Latin,mplcairo,Segoe UI,0,0.882,0.886,6.47
