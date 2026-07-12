@@ -865,6 +865,40 @@ def annotate_multilingual(
 
     arrow_artist = None
     if arrowprops is not None:
+        arrowprops = dict(arrowprops)
+        # The arrow is anchored at the CENTER of the rendered text image
+        # (the empty native annotation has no bbox to stop at), so
+        # without shrinking it strikes through the text. Compute the
+        # image's half-extent along the arrow direction and start the
+        # tail just outside it. shrinkA is in points: display px at
+        # fig.dpi = img_px * zoom * dpi/100, and points = px * 72/dpi,
+        # so points = img_px * zoom * 0.72 (dpi cancels).
+        if "arrowstyle" in arrowprops and "shrinkA" not in arrowprops:
+            try:
+                fs = _resolve_font_size(fontsize, font_size, default=18)
+                qimg = render_text_qimage(
+                    text=text, font_family=font_family, font_path=font_path,
+                    font_size=fs, color=color, bg=bg,
+                    padding=padding, scale=scale,
+                )
+                z = zoom if zoom is not None else _default_zoom_for_fontsize(fs)
+                half_w = qimg.width() * z * 0.72 / 2.0
+                half_h = qimg.height() * z * 0.72 / 2.0
+
+                p_text = _resolve_xycoords(ax, textcoord).transform(xytext)
+                p_xy = _resolve_xycoords(ax, coord).transform(xy)
+                dx, dy = p_xy[0] - p_text[0], p_xy[1] - p_text[1]
+                norm = float(np.hypot(dx, dy))
+                if norm > 1e-6:
+                    c, s = abs(dx) / norm, abs(dy) / norm
+                    d = min(
+                        half_w / c if c > 1e-6 else np.inf,
+                        half_h / s if s > 1e-6 else np.inf,
+                    )
+                    arrowprops["shrinkA"] = float(d + 2.0)
+            except Exception:
+                pass
+
         arrow_artist = ax.annotate(
             "",
             xy=xy,
