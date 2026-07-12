@@ -1,5 +1,5 @@
-<p align="center">
-  <img src="assets/universal_render.jpg" alt="universal-render" width="720">
+﻿<p align="center">
+  <img src="https://raw.githubusercontent.com/mbs57/universal-render/master/assets/universal_render.jpg" alt="universal-render" width="720">
 </p>
 
 <h1 align="center">universal-render</h1>
@@ -24,7 +24,7 @@ Matplotlib's text engine cannot shape complex scripts — Bengali conjuncts brea
 Left: Matplotlib's own text engine. Right: the same text through `universal_render` — 22 scripts, same machine, zero configuration.
 
 <p align="center">
-  <img src="assets/comparison_before_after.png" alt="Matplotlib default vs universal_render across 22 scripts" width="900">
+  <img src="https://raw.githubusercontent.com/mbs57/universal-render/master/assets/comparison_before_after.png" alt="Matplotlib default vs universal_render across 22 scripts" width="900">
 </p>
 
 And it isn't just tofu: even with the *correct font installed*, Matplotlib (and, on Windows, mplcairo and Pillow — their official wheels ship without Raqm/HarfBuzz) silently renders complex scripts unshaped: Arabic unjoined, Bengali conjuncts split, with **zero warnings**. See [`evaluation/`](evaluation/) for the measured comparison.
@@ -62,7 +62,7 @@ plt.savefig("plot.png", dpi=300)
 ```
 
 <p align="center">
-  <img src="assets/line_plot_six_scripts.png" alt="Line plot with Bengali, Cyrillic, Tamil, Arabic, Hindi, Thai and English labels" width="640">
+  <img src="https://raw.githubusercontent.com/mbs57/universal-render/master/assets/line_plot_six_scripts.png" alt="Line plot with Bengali, Cyrillic, Tamil, Arabic, Hindi, Thai and English labels" width="640">
 </p>
 
 ### One-call APIs
@@ -90,8 +90,8 @@ ur.self_test()
 ```
 
 <p align="center">
-  <img src="assets/heatmap_six_scripts.png" alt="Heatmap with per-cell text in five scripts" width="480">
-  <img src="assets/styling_showcase.png" alt="Bold suptitle, left-aligned mixed-script title, rotated Bengali ticks" width="480">
+  <img src="https://raw.githubusercontent.com/mbs57/universal-render/master/assets/heatmap_six_scripts.png" alt="Heatmap with per-cell text in five scripts" width="480">
+  <img src="https://raw.githubusercontent.com/mbs57/universal-render/master/assets/styling_showcase.png" alt="Bold suptitle, left-aligned mixed-script title, rotated Bengali ticks" width="480">
 </p>
 
 ## 📦 API Overview
