@@ -315,11 +315,36 @@ def _build_generic_handle_box(width=18, height=12):
     return da
 
 
+def _build_collection_handle_box(handle, width=18, height=12):
+    """
+    Legend handle sample for scatter plots (PathCollection): a marker
+    dot in the collection's face colour.
+    """
+    da = DrawingArea(width, height, 0, 0)
+    color = (0.3, 0.3, 0.3, 1.0)
+    try:
+        fc = handle.get_facecolor()
+        if len(fc):
+            color = tuple(fc[0])
+    except Exception:
+        pass
+    mark = Line2D(
+        [width / 2.0], [height / 2.0],
+        marker="o", markersize=6, linestyle="None",
+        markerfacecolor=color, markeredgecolor=color,
+    )
+    da.add_artist(mark)
+    return da
+
+
 def _build_legend_handle_box(handle):
+    from matplotlib.collections import Collection
     if isinstance(handle, Line2D):
         return _build_line_handle_box(handle)
     if isinstance(handle, Patch):
         return _build_patch_handle_box(handle)
+    if isinstance(handle, Collection):
+        return _build_collection_handle_box(handle)
     return _build_generic_handle_box()
 
 
