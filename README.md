@@ -9,10 +9,16 @@
 </p>
 
 <p align="center">
+  <a href="https://pypi.org/project/universal-render/"><img alt="PyPI" src="https://img.shields.io/pypi/v/universal-render"></a>
   <img alt="Python" src="https://img.shields.io/badge/python-3.9%2B-blue">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
   <img alt="Scripts" src="https://img.shields.io/badge/scripts%20verified-22-orange">
   <img alt="Tests" src="https://img.shields.io/badge/tests-34%20passing-brightgreen">
+</p>
+
+<p align="center">
+  <a href="https://colab.research.google.com/github/mbs57/universal-render/blob/master/notebooks/universal_render_demo.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+  <a href="https://kaggle.com/kernels/welcome?src=https://github.com/mbs57/universal-render/blob/master/notebooks/universal_render_demo.ipynb"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg"></a>
 </p>
 
 ---
@@ -133,9 +139,12 @@ Script *detection* additionally covers Katakana, Tibetan, Georgian, Armenian, an
 ## 🛠 Installation
 
 ```bash
-pip install PySide6 matplotlib numpy
-pip install git+https://github.com/mbs57/universal-render.git
+pip install universal-render
 ```
+
+Or try it without installing anything — the [demo notebook](notebooks/universal_render_demo.ipynb) runs on
+[Colab](https://colab.research.google.com/github/mbs57/universal-render/blob/master/notebooks/universal_render_demo.ipynb) or
+[Kaggle](https://kaggle.com/kernels/welcome?src=https://github.com/mbs57/universal-render/blob/master/notebooks/universal_render_demo.ipynb) with one click (on Kaggle, enable *Internet* in the notebook settings).
 
 Fonts: on Windows, everything works out of the box (Nirmala UI, Segoe UI, Leelawadee UI…). On Linux/Colab, install Noto fonts (`fonts-noto` / `fonts-noto-cjk`) — the fallback tables pick them up automatically. Verify any environment with:
 
