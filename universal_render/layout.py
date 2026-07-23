@@ -185,8 +185,8 @@ class UniversalLayoutManager:
     User zoom is used exactly — no auto-zoom manipulation.
     """
 
-    X_TICK_GAP_PX           = 9.0
-    Y_TICK_GAP_PX           = 9.0
+    X_TICK_GAP_PX           = 20.0
+    Y_TICK_GAP_PX           = 20.0
     X_LABEL_BASE_GAP_PX     = 10.0
     Y_LABEL_BASE_GAP_PX     = 14.0
     TITLE_TO_AXES_GAP_PX    = 10.0
