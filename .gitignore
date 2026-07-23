@@ -24,3 +24,6 @@ Thumbs.db
 
 # Original full-resolution logo (compressed copy lives in assets/)
 Univeral_Render.png
+
+# Language gallery generated images
+gallery_output/
