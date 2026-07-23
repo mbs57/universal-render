@@ -30,7 +30,7 @@ Typical usage:
     ur.apply_multilingual_layout(fig, auto=True)
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 # ---------------------------------------------------------------------
 # Backend / environment

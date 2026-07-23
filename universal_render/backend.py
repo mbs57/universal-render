@@ -127,6 +127,36 @@ def _ensure_offscreen_env(force: bool = False) -> bool:
     return True
 
 
+def _clear_offscreen_on_native_platform() -> Optional[str]:
+    """
+    Drop QT_QPA_PLATFORM=offscreen on Windows and macOS.
+
+    Qt's offscreen platform plugin carries no font engine on those systems,
+    so every string rasterizes to nothing and figures come out blank with
+    no error. Windows and macOS render correctly through their native
+    plugin without a visible window, so offscreen is never needed there.
+    Notebooks written for Linux commonly set the variable unconditionally,
+    which is why this guard exists.
+
+    Returns a warning message if the variable was cleared, else None.
+    """
+    system = platform.system().lower()
+    if system not in ("windows", "darwin"):
+        return None
+    if (os.environ.get("QT_QPA_PLATFORM") or "").lower() != "offscreen":
+        return None
+    if is_colab_environment() or is_kaggle_environment():
+        return None
+
+    os.environ.pop("QT_QPA_PLATFORM", None)
+    return (
+        f"QT_QPA_PLATFORM=offscreen was cleared on {platform.system()}: the "
+        "Qt offscreen plugin cannot rasterize text on this platform and "
+        "would render every label blank. The native platform plugin is "
+        "used instead and works without a visible window."
+    )
+
+
 def _existing_app():
     """
     Return an existing Qt application instance if one exists.
@@ -195,6 +225,12 @@ def init_renderer(
     use_headless = _normalize_bool(headless, inferred_headless)
 
     warnings: List[str] = []
+
+    # Must run before the QApplication is constructed: Qt reads the
+    # platform plugin name from the environment at that moment.
+    cleared = _clear_offscreen_on_native_platform()
+    if cleared:
+        warnings.append(cleared)
 
     if _INITIALIZED and not force:
         _STATUS.headless = use_headless
