@@ -4,6 +4,7 @@ from __future__ import annotations
 import os
 import sys
 import platform
+import warnings as _pywarnings
 from dataclasses import dataclass, asdict, field
 from typing import Any, Dict, List, Optional
 
@@ -157,6 +158,42 @@ def _clear_offscreen_on_native_platform() -> Optional[str]:
     )
 
 
+def _warn_if_app_is_offscreen(app) -> Optional[str]:
+    """
+    Detect a Qt application that was already created under the offscreen
+    platform on Windows or macOS.
+
+    Qt applications are process-global and cannot change platform plugin
+    after construction, so clearing the environment variable no longer
+    helps at this point: every render will be blank. This happens when a
+    notebook kernel imported Qt with QT_QPA_PLATFORM=offscreen earlier in
+    the same session. The only remedy is restarting the process, so say
+    so loudly rather than returning empty images.
+    """
+    system = platform.system().lower()
+    if system not in ("windows", "darwin"):
+        return None
+    if is_colab_environment() or is_kaggle_environment():
+        return None
+    try:
+        name = str(app.platformName()).lower()
+    except Exception:
+        return None
+    if name != "offscreen":
+        return None
+
+    msg = (
+        "Qt is already running with the 'offscreen' platform plugin on "
+        f"{platform.system()}, which cannot rasterize text: every label "
+        "will render blank. A Qt application cannot change platform after "
+        "it starts, so please RESTART the kernel or process. Make sure "
+        "QT_QPA_PLATFORM is not set to 'offscreen' before the first "
+        "import (it is only needed on headless Linux)."
+    )
+    _pywarnings.warn(msg, RuntimeWarning, stacklevel=3)
+    return msg
+
+
 def _existing_app():
     """
     Return an existing Qt application instance if one exists.
@@ -256,6 +293,10 @@ def init_renderer(
     if existing is not None:
         _APP = existing
         _INITIALIZED = True
+
+        stale = _warn_if_app_is_offscreen(existing)
+        if stale:
+            warnings.append(stale)
 
         _STATUS.initialized = True
         _STATUS.app_created = True
